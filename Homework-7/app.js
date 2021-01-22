@@ -1,41 +1,28 @@
-let main = document.getElementById('main');
-let colum = document.getElementById('colum');
-let row = document.getElementById('row');
-let table = document.getElementById('table');
-let itemOne;
-let itemTwo;
+let tableWrapper = document.getElementById('wrapper');
+let rows = document.getElementById('rows');
+let columns = document.getElementById('columns');
+let counter1 = 1;
+let counter2 = 1;
+
+columns.addEventListener('input',populateTable);
+rows.addEventListener('input',populateTable);
 
 
-row.addEventListener('input',inputs);
-colum.addEventListener('input',inputs);
+function populateTable() {
+    table.innerHTML = '';
+    let tbody = document.createElement('tbody');
+    let child = tbody.children;
+    for (let r = 0; r < rows.value; r++) {
+        tbody.innerHTML += '<tr></tr>';
+        for (let c = 0; c < columns.value; c++) {
+            child[r].innerHTML += `<td>Rows ${counter1} Columns ${counter2}</td>`;
 
-
-
-function inputs(){
-    crateTable(colum.value,row.value);
-    
-}
-
-
-function crateTable(colum,row){
-   for(let i = 0 ; i < colum.length ; i++){
-        
-    itemOne = document.createElement('th');
-
-
-    itemOne.innerHTML = `Colum ${colum[i]}`;
-
-
-    table.appendChild(itemOne);
+            counter2++;
+        }
+        counter1++;
+        counter2 = 1;
     }
 
-   for(let i = 0 ; i < row.length ; i++){
-        
-    itemTwo = document.createElement('tr');
-
-    itemTwo.innerHTML = `Row ${row[i]}`;
-
-    table.appendChild(itemTwo);
-    }
-}
+    table.append(tbody);
+};
 
